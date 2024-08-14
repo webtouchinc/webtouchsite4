@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store Management</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #2b2b2b;
+            color: #f5f5f5;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #00c853;
+        }
+
+        .sliding-menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #2b2b2b;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: right 0.5s ease;
+            z-index: 999;
+        }
+
+        .sliding-menu.open {
+            right: 0;
+        }
+
+        .sliding-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sliding-menu ul li {
+            margin-bottom: 20px;
+        }
+
+        .sliding-menu ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 18px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .sliding-menu ul li a:hover {
+            color: #00c853;
+        }
+
+        .container {
+            margin-top: 100px;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 40px 0;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-item img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 8px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .content-item img:hover {
+            transform: scale(1.1);
+        }
+
+        .content-item p {
+            flex: 1;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .content-item:hover p {
+            color: #00c853;
+        }
+
+        footer {
+            background-color: #2b2b2b;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .content-item {
+                flex-direction: column;
+            }
+
+            .content-item img {
+                margin: 0 0 20px 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Store Manager</div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Customers</a></li>
+            <li><a href="#">Reports</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="sliding-menu" id="menu">
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Orders</a></li>
+        <li><a href="#">Customers</a></li>
+        <li><a href="#">Reports</a></li>
+    </ul>
+</div>
+
+<div class="container fade-in">
+    <section class="section dashboard">
+        <h2>Dashboard Overview</h2>
+        <div class="content-item">
+            <img src="1.jpeg" alt="Dashboard Image">
+            <p>Monitor your store's performance with real-time data on sales, inventory, and customer activity. The dashboard provides all the critical insights needed to make informed decisions and keep your store running smoothly.</p>
+        </div>
+    </section>
+
+    <section class="section products">
+        <h2>Manage Products</h2>
+        <div class="content-item">
+            <img src="2.jpeg" alt="Products Image">
+            <p>Easily add, update, and manage your products. Organize your inventory, set prices, and categorize items to ensure your store is always stocked and ready for customers.</p>
+        </div>
+    </section>
+
+    <section class="section orders">
+        <h2>Orders Management</h2>
+        <div class="content-item">
+            <img src="3.jpeg" alt="Orders Image">
+            <p>Keep track of all orders in one place. From processing new orders to handling returns, our order management system simplifies the process and keeps everything organized.</p>
+        </div>
+    </section>
+
+    <section class="section customers">
+        <h2>Customer Relations</h2>
+        <div class="content-item">
+            <img src="4.jpeg" alt="Customers Image">
+            <p>Build strong relationships with your customers by tracking their purchase history, managing their accounts, and engaging with them through targeted marketing campaigns.</p>
+        </div>
+    </section>
+
+    <section class="section reports">
+        <h2>Sales Reports</h2>
+        <div class="content-item">
+            <img src="5.jpeg" alt="Reports Image">
+            <p>Generate detailed reports on sales, revenue, and other key metrics. Use these insights to identify trends, make data-driven decisions, and drive your store's growth.</p>
+        </div>
+    </section>
+
+    <section class="section inventory">
+        <h2>Inventory Management</h2>
+        <div class="content-item">
+            <img src="6.jpeg" alt="Inventory Image">
+            <p>Stay on top of your stock levels with our comprehensive inventory management tools. Get alerts when stock is running low and easily manage restocking.</p>
+        </div>
+    </section>
+
+    <section class="section marketing">
+        <h2>Marketing Campaigns</h2>
+        <div class="content-item">
+            <img src="7.jpeg" alt="Marketing Image">
+            <p>Create and manage marketing campaigns to boost your store's visibility. Track campaign performance and optimize your strategies to reach more customers.</p>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 Store Manager. All Rights Reserved.</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('menu').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
